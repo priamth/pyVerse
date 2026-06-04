@@ -1,0 +1,430 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- THEME TOKENS ---------- */
+@layer base {
+  :root {
+    /* Default = cyberpunk */
+    --bg: 240 25% 5%;
+    --bg-elev: 245 25% 8%;
+    --bg-soft: 245 20% 12%;
+    --fg: 280 30% 95%;
+    --fg-dim: 260 15% 70%;
+    --border: 260 25% 22%;
+    --accent: 320 95% 60%;     /* magenta */
+    --accent-2: 175 90% 55%;   /* cyan */
+    --ring: 320 95% 60%;
+    --radius: 14px;
+
+    /* shadcn aliases */
+    --background: var(--bg);
+    --foreground: var(--fg);
+    --card: var(--bg-elev);
+    --card-foreground: var(--fg);
+    --popover: var(--bg-elev);
+    --popover-foreground: var(--fg);
+    --primary: var(--accent);
+    --primary-foreground: 0 0% 100%;
+    --secondary: var(--bg-soft);
+    --secondary-foreground: var(--fg);
+    --muted: var(--bg-soft);
+    --muted-foreground: var(--fg-dim);
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --input: var(--bg-soft);
+
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-body: "Space Grotesk", system-ui, sans-serif;
+
+    --chart-1: 320 95% 60%;
+    --chart-2: 175 90% 55%;
+    --chart-3: 260 70% 65%;
+    --chart-4: 45 95% 60%;
+    --chart-5: 130 70% 55%;
+  }
+
+  [data-theme="cyberpunk"] {
+    --bg: 240 30% 5%;
+    --bg-elev: 245 30% 9%;
+    --bg-soft: 245 25% 14%;
+    --fg: 280 30% 95%;
+    --fg-dim: 260 15% 72%;
+    --border: 320 50% 28%;
+    --accent: 320 95% 60%;
+    --accent-2: 175 90% 55%;
+    --ring: 320 95% 60%;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Space Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  [data-theme="terminal"] {
+    --bg: 130 30% 4%;
+    --bg-elev: 130 30% 6%;
+    --bg-soft: 130 25% 10%;
+    --fg: 125 80% 75%;
+    --fg-dim: 125 50% 55%;
+    --border: 125 60% 22%;
+    --accent: 125 90% 55%;
+    --accent-2: 80 90% 60%;
+    --ring: 125 90% 55%;
+    --font-display: "VT323", "JetBrains Mono", monospace;
+    --font-body: "VT323", "JetBrains Mono", monospace;
+    --font-mono: "VT323", "JetBrains Mono", monospace;
+  }
+
+  [data-theme="modern"] {
+    --bg: 220 20% 98%;
+    --bg-elev: 0 0% 100%;
+    --bg-soft: 220 20% 95%;
+    --fg: 222 30% 12%;
+    --fg-dim: 220 15% 40%;
+    --border: 220 20% 88%;
+    --accent: 222 80% 55%;
+    --accent-2: 280 70% 55%;
+    --ring: 222 80% 55%;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Space Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  [data-theme="synthwave"] {
+    --bg: 260 50% 6%;
+    --bg-elev: 260 50% 10%;
+    --bg-soft: 260 45% 14%;
+    --fg: 320 100% 92%;
+    --fg-dim: 290 50% 75%;
+    --border: 300 60% 30%;
+    --accent: 330 100% 65%;
+    --accent-2: 30 100% 60%;
+    --ring: 330 100% 65%;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Space Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  [data-theme="amber"] {
+    --bg: 30 35% 5%;
+    --bg-elev: 30 35% 8%;
+    --bg-soft: 30 30% 12%;
+    --fg: 38 100% 70%;
+    --fg-dim: 35 60% 50%;
+    --border: 35 70% 22%;
+    --accent: 38 100% 60%;
+    --accent-2: 18 100% 55%;
+    --ring: 38 100% 60%;
+    --font-display: "VT323", "JetBrains Mono", monospace;
+    --font-body: "VT323", "JetBrains Mono", monospace;
+    --font-mono: "VT323", "JetBrains Mono", monospace;
+  }
+
+  [data-theme="ocean"] {
+    --bg: 215 50% 7%;
+    --bg-elev: 215 50% 10%;
+    --bg-soft: 215 45% 14%;
+    --fg: 195 100% 92%;
+    --fg-dim: 200 30% 72%;
+    --border: 200 60% 26%;
+    --accent: 195 100% 55%;
+    --accent-2: 165 90% 55%;
+    --ring: 195 100% 55%;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Space Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body, #root { height: 100%; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 12% 10%, hsl(var(--accent) / 0.10), transparent 40%),
+      radial-gradient(circle at 90% 85%, hsl(var(--accent-2) / 0.08), transparent 45%);
+    background-attachment: fixed;
+  }
+  [data-theme="terminal"] body {
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        hsl(var(--accent) / 0.04) 0px,
+        hsl(var(--accent) / 0.04) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+  }
+  [data-theme="modern"] body {
+    background-image:
+      radial-gradient(circle at 12% 10%, hsl(var(--accent) / 0.08), transparent 40%),
+      radial-gradient(circle at 90% 85%, hsl(var(--accent-2) / 0.06), transparent 45%);
+  }
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+.font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
+.font-mono    { font-family: var(--font-mono); }
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 0.99; }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.45; }
+}
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--accent) / 0.45); }
+  50%      { box-shadow: 0 0 24px 4px hsl(var(--accent) / 0.30); }
+}
+
+.animate-fade-up { animation: fade-in-up 0.45s ease-out both; }
+[data-reduce-motion="1"] * { animation: none !important; transition: none !important; }
+
+/* ---------- TOOL CARD ---------- */
+.tool-card {
+  position: relative;
+  border-radius: var(--radius);
+  background: hsl(var(--bg-elev));
+  border: 1px solid hsl(var(--border));
+  overflow: hidden;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  cursor: pointer;
+}
+.tool-card::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--cat-color, hsl(var(--accent))) 0%, transparent 55%);
+  opacity: 0.18;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--cat-color, hsl(var(--accent)));
+  box-shadow: 0 12px 40px -12px var(--cat-color, hsl(var(--accent) / 0.5));
+}
+.tool-card:hover::before { opacity: 0.32; }
+.tool-card .cat-strip {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; background: var(--cat-color, hsl(var(--accent)));
+}
+
+/* CRT scanline overlay only on terminal theme */
+[data-theme="terminal"] .tool-card::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      hsl(0 0% 0% / 0.18) 0,
+      hsl(0 0% 0% / 0.18) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- CATEGORY CHIP ---------- */
+.cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: color-mix(in oklab, var(--cat-color, hsl(var(--accent))) 18%, transparent);
+  color: var(--cat-color, hsl(var(--accent)));
+  border: 1px solid color-mix(in oklab, var(--cat-color, hsl(var(--accent))) 35%, transparent);
+}
+
+/* ---------- BUTTONS ---------- */
+.btn-geek {
+  position: relative;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: hsl(var(--accent));
+  color: hsl(var(--primary-foreground));
+  transition: transform 150ms ease, box-shadow 200ms ease;
+}
+.btn-geek:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -6px hsl(var(--accent) / 0.55); }
+.btn-geek:active { transform: translateY(0); }
+
+/* ---------- NAV ---------- */
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsl(var(--fg-dim));
+  position: relative;
+  padding: 6px 2px;
+}
+.nav-link::after {
+  content: "";
+  position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 2px; background: hsl(var(--accent));
+  transition: right 200ms ease;
+}
+.nav-link:hover, .nav-link.active { color: hsl(var(--fg)); }
+.nav-link.active::after { right: 0; }
+
+/* ---------- SCAN LINE on hero ---------- */
+.hero-scan {
+  position: relative; overflow: hidden;
+}
+.hero-scan::after {
+  content: "";
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.7), transparent);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ---------- SETTINGS GEAR ---------- */
+.settings-trigger {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  width: 48px; height: 48px;
+  border-radius: 999px;
+  background: hsl(var(--bg-elev));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  color: hsl(var(--fg));
+  z-index: 60;
+  box-shadow: 0 12px 32px -10px hsl(0 0% 0% / 0.55);
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+.settings-trigger:hover {
+  transform: rotate(45deg);
+  border-color: hsl(var(--accent));
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: hsl(var(--bg)); }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--bg-soft));
+  border-radius: 999px;
+  border: 2px solid hsl(var(--bg));
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent) / 0.55); }
+
+/* ---------- TERMINAL THEME EXTRAS ---------- */
+[data-theme="terminal"] h1,
+[data-theme="terminal"] h2 { animation: flicker 7s infinite; }
+
+[data-theme="terminal"] .btn-geek {
+  text-shadow: 0 0 8px hsl(var(--accent) / 0.7);
+}
+
+/* ---------- MODERN THEME ADJUSTMENTS ---------- */
+[data-theme="modern"] .tool-card { box-shadow: 0 2px 6px -2px hsl(220 20% 50% / 0.15); }
+[data-theme="modern"] .tool-card:hover { box-shadow: 0 18px 40px -16px var(--cat-color, hsl(var(--accent))); }
+
+/* Compact mode reduces card padding */
+[data-compact="1"] .tool-card .body { padding: 14px !important; }
+
+/* ---------- DENSITY ---------- */
+[data-density="compact"]  .tool-card .body { padding: 14px; }
+[data-density="spacious"] .tool-card .body { padding: 26px; }
+
+/* ---------- FONT SIZE ---------- */
+[data-font-size="small"]  { font-size: 14px; }
+[data-font-size="normal"] { font-size: 16px; }
+[data-font-size="large"]  { font-size: 18px; }
+
+/* ---------- GLOW ---------- */
+[data-glow="off"]  .tool-card:hover { box-shadow: none !important; }
+[data-glow="low"]  .tool-card:hover { box-shadow: 0 6px 18px -10px var(--cat-color, hsl(var(--accent) / 0.4)); }
+[data-glow="high"] .tool-card:hover { box-shadow: 0 14px 44px -10px var(--cat-color, hsl(var(--accent) / 0.55)); }
+
+/* ---------- CARD HOVER VARIANTS ---------- */
+[data-card-hover="none"] .tool-card:hover { transform: none; }
+[data-card-hover="glow"] .tool-card:hover { transform: none; }
+[data-card-hover="lift"] .tool-card:hover { transform: translateY(-3px); }
+
+/* ---------- SCANLINES toggle (only on terminal-like themes by default) ---------- */
+[data-scanlines="off"] .tool-card::after { display: none !important; }
+[data-scanlines="off"][data-theme="terminal"] body { background-image: none; }
+[data-theme]:not([data-theme="terminal"]):not([data-theme="amber"]) .tool-card::after { display: none; }
+[data-scanlines="on"] .tool-card::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      hsl(0 0% 0% / 0.16) 0,
+      hsl(0 0% 0% / 0.16) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- AMBER THEME EXTRAS ---------- */
+[data-theme="amber"] body {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      hsl(var(--accent) / 0.04) 0px,
+      hsl(var(--accent) / 0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+[data-theme="amber"] h1,
+[data-theme="amber"] h2 { animation: flicker 8s infinite; }
+
+/* ---------- SYNTHWAVE EXTRAS ---------- */
+[data-theme="synthwave"] body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 110%, hsl(var(--accent) / 0.25), transparent 60%),
+    linear-gradient(180deg, hsl(var(--bg)) 0%, hsl(260 60% 12%) 100%);
+}
+[data-theme="synthwave"] .hero-scan::before {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 50%;
+  background-image:
+    linear-gradient(transparent 95%, hsl(var(--accent) / 0.7) 0),
+    linear-gradient(90deg, transparent 95%, hsl(var(--accent) / 0.7) 0);
+  background-size: 40px 40px;
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: center bottom;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ---------- OCEAN EXTRAS ---------- */
+[data-theme="ocean"] body {
+  background-image:
+    radial-gradient(ellipse at 50% -20%, hsl(var(--accent-2) / 0.18), transparent 60%),
+    radial-gradient(ellipse at 80% 110%, hsl(var(--accent) / 0.15), transparent 55%);
+}
+
+/* ---------- HIGH CONTRAST ---------- */
+[data-high-contrast="1"] {
+  --border: 0 0% 60%;
+}
+[data-high-contrast="1"] .tool-card { border-width: 2px; }
+[data-high-contrast="1"] .text-muted-foreground { color: hsl(var(--fg)) !important; opacity: 0.92; }
